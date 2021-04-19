@@ -1,12 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View,Image,TextInput,ScrollView } from 'react-native';
 
 export default function App() {
+  const [name,setName] = useState()
   return (
-    <ScrollView>
+    
     <View style={styles.container}>
       <Text>Hello React Native App</Text>
+      <Text style={{fontSize:'40px'}}>{name}</Text>
       <Image
           source={{
             uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
@@ -19,11 +21,12 @@ export default function App() {
           borderColor: 'gray',
           borderWidth: 1
         }}
-        defaultValue="You can type in me"
+        onChangeText={text=> setName(text)}
+        defaultValue=""
       />
       <StatusBar style="auto" />
     </View>
-    </ScrollView>
+    
   );
 }
 
