@@ -1,13 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View,Image,TextInput,ScrollView } from 'react-native';
+import User from './component/Users/User';
 
 export default function App() {
-  const [name,setName] = useState()
+  const [name,setName] = useState('');
+  const [user,setUser] = useState([]);
+  useEffect(()=>{
+    fetch(`https://jsonplaceholder.typicode.com/users`)
+    .then(res=>res.json())
+    .then(data=>setUser(data))
+  },[])
   return (
     
     <View style={styles.container}>
       <Text>Hello React Native App</Text>
+      <Text>Total Friend {user.length}</Text>
+      {
+        user.map(users => <User user={users}></User>)
+      }
       <Text style={{fontSize:'40px'}}>{name}</Text>
       <Image
           source={{
